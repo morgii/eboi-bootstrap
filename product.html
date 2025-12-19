@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Habits - Eboi</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Additional styles specific to product page */
+        .product-section {
+            padding: 4rem 0;
+        }
+        
+        .product-image-main {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            background-color: var(--tertiary-bg);
+        }
+        
+        .product-thumbnail {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: var(--tertiary-bg);
+        }
+        
+        .product-thumbnail:hover,
+        .product-thumbnail.active {
+            border-color: var(--primary-text);
+            transform: scale(1.05);
+        }
+        
+        .product-title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .product-author-main {
+            font-size: 1.3rem;
+            color: var(--secondary-text);
+            margin-bottom: 2rem;
+        }
+        
+        .product-price-main {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-text);
+            margin-bottom: 2rem;
+        }
+        
+        .product-rating {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .rating-stars {
+            color: #ffc107;
+        }
+        
+        .product-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--secondary-text);
+            margin-bottom: 2rem;
+        }
+        
+        .product-format {
+            background-color: var(--secondary-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .format-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .format-option:hover,
+        .format-option.active {
+            border-color: var(--primary-text);
+            background-color: var(--tertiary-bg);
+        }
+        
+        .format-option input[type="radio"] {
+            margin-right: 1rem;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--border-color);
+            background-color: var(--secondary-bg);
+            color: var(--primary-text);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .qty-btn:hover {
+            background-color: var(--primary-text);
+            color: var(--primary-bg);
+        }
+        
+        .qty-input {
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            background-color: var(--secondary-bg);
+            border: 2px solid var(--border-color);
+            color: var(--primary-text);
+            border-radius: 5px;
+        }
+        
+        .btn-add-cart {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .product-meta {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .meta-item:last-child {
+            border-bottom: none;
+        }
+        
+        .meta-label {
+            color: var(--secondary-text);
+            font-weight: 600;
+        }
+        
+        .tabs-section {
+            margin-top: 4rem;
+        }
+        
+        .product-tabs {
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--secondary-text);
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn:hover,
+        .tab-btn.active {
+            color: var(--primary-text);
+            border-bottom-color: var(--primary-text);
+        }
+        
+        .tab-content-item {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .tab-content-item.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .review-card {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .review-date {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+        
+        .related-product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .related-product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: var(--tertiary-bg);
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#">EBOI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Digital Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Physical Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <button class="btn btn-custom ms-3">
+                    <i class="fas fa-shopping-cart me-2"></i>Cart (0)
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PRODUCT SECTION -->
+    <section class="product-section">
+        <div class="container">
+            <div class="row">
+                <!-- Product Images -->
+                <div class="col-lg-6">
+                    <img id="mainImage" src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1200&auto=format&fit=crop" 
+                         alt="Atomic Habits" 
+                         class="product-image-main mb-3">
+                    
+                    <div class="row g-2">
+                        <div class="col-3">
+                            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400&auto=format&fit=crop" 
+                                 alt="View 1" 
+                                 class="product-thumbnail active"
+                                 onclick="changeImage(this.src)">
+                        </div>
+                        <div class="col-3">
+                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=400&auto=format&fit=crop" 
+                                 alt="View 2" 
+                                 class="product-thumbnail"
+                                 onclick="changeImage(this.src)">
+                        </div>
+                        <div class="col-3">
+                            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=400&auto=format&fit=crop" 
+                                 alt="View 3" 
+                                 class="product-thumbnail"
+                                 onclick="changeImage(this.src)">
+                        </div>
+                        <div class="col-3">
+                            <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=400&auto=format&fit=crop" 
+                                 alt="View 4" 
+                                 class="product-thumbnail"
+                                 onclick="changeImage(this.src)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="col-lg-6">
+                    <h1 class="product-title-main">Atomic Habits</h1>
+                    <p class="product-author-main">by James Clear</p>
+                    
+                    <div class="product-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="ms-2">(4.8 / 5)</span>
+                        <span class="ms-3 text-secondary">2,847 Reviews</span>
+                    </div>
+                    
+                    <div class="product-price-main">$14.99</div>
+                    
+                    <p class="product-description">
+                        Atomic Habits offers a proven framework for improving every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.
+                    </p>
+                    
+                    <!-- Format Selection -->
+                    <div class="product-format">
+                        <h5 class="mb-3">Select Format:</h5>
+                        <label class="format-option active">
+                            <input type="radio" name="format" value="digital" checked>
+                            <div>
+                                <strong>Digital (PDF/EPUB)</strong><br>
+                                <small class="text-secondary">Instant Download</small>
+                            </div>
+                            <div class="ms-auto">
+                                <strong>$14.99</strong>
+                            </div>
+                        </label>
+                        <label class="format-option">
+                            <input type="radio" name="format" value="physical">
+                            <div>
+                                <strong>Physical Paperback</strong><br>
+                                <small class="text-secondary">Ships in 3-5 days</small>
+                            </div>
+                            <div class="ms-auto">
+                                <strong>$19.99</strong>
+                            </div>
+                        </label>
+                        <label class="format-option">
+                            <input type="radio" name="format" value="hardcover">
+                            <div>
+                                <strong>Hardcover Edition</strong><br>
+                                <small class="text-secondary">Premium quality</small>
+                            </div>
+                            <div class="ms-auto">
+                                <strong>$24.99</strong>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <!-- Quantity -->
+                    <div class="quantity-selector">
+                        <label class="me-3"><strong>Quantity:</strong></label>
+                        <button class="qty-btn" onclick="decreaseQty()">-</button>
+                        <input type="number" id="quantity" class="qty-input" value="1" min="1" readonly>
+                        <button class="qty-btn" onclick="increaseQty()">+</button>
+                    </div>
+                    
+                    <!-- Buttons -->
+                    <button class="btn btn-custom btn-add-cart">
+                        <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                    </button>
+                    <button class="btn btn-outline-light w-100">
+                        <i class="fas fa-heart me-2"></i>Add to Wishlist
+                    </button>
+                    
+                    <!-- Product Meta -->
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">ISBN:</span>
+                            <span>978-0735211292</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Publisher:</span>
+                            <span>Avery Publishing</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Pages:</span>
+                            <span>320 pages</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Language:</span>
+                            <span>English</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Category:</span>
+                            <span>Self-Help, Personal Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs Section -->
+            <div class="tabs-section">
+                <div class="product-tabs">
+                    <button class="tab-btn active" onclick="openTab('description')">Description</button>
+                    <button class="tab-btn" onclick="openTab('reviews')">Reviews</button>
+                    <button class="tab-btn" onclick="openTab('author')">About Author</button>
+                </div>
+                
+                <!-- Description Tab -->
+                <div id="description" class="tab-content-item active">
+                    <h3 class="mb-4">Product Description</h3>
+                    <p class="product-description">
+                        No matter your goals, Atomic Habits offers a proven framework for improving—every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.
+                    </p>
+                    <p class="product-description">
+                        If you're having trouble changing your habits, the problem isn't you. The problem is your system. Bad habits repeat themselves again and again not because you don't want to change, but because you have the wrong system for change. You do not rise to the level of your goals. You fall to the level of your systems. Here, you'll get a proven system that can take you to new heights.
+                    </p>
+                    <h4 class="mt-4 mb-3">Key Features:</h4>
+                    <ul class="product-description">
+                        <li>Proven strategies backed by science and research</li>
+                        <li>Practical examples from everyday life</li>
+                        <li>Easy-to-implement framework for habit formation</li>
+                        <li>Suitable for personal and professional development</li>
+                        <li>Bestseller with millions of copies sold worldwide</li>
+                    </ul>
+                </div>
+                
+                <!-- Reviews Tab -->
+                <div id="reviews" class="tab-content-item">
+                    <h3 class="mb-4">Customer Reviews</h3>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="reviewer-name">Sarah Johnson</div>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="review-date">December 10, 2024</div>
+                        </div>
+                        <p class="product-description">
+                            Life-changing book! The concepts are simple yet powerful. I've been implementing the strategies for 2 months and already seeing significant improvements in my daily routine.
+                        </p>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="reviewer-name">Michael Chen</div>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="review-date">November 28, 2024</div>
+                        </div>
+                        <p class="product-description">
+                            Excellent book with practical advice. Some concepts overlap with other self-help books, but James Clear's approach is unique and effective.
+                        </p>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="reviewer-name">Emma Williams</div>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="review-date">November 15, 2024</div>
+                        </div>
+                        <p class="product-description">
+                            Must read for anyone looking to improve themselves. The digital version is great - I can highlight and take notes easily!
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Author Tab -->
+                <div id="author" class="tab-content-item">
+                    <h3 class="mb-4">About the Author</h3>
+                    <p class="product-description">
+                        <strong>James Clear</strong> is an author and speaker focused on habits, decision making, and continuous improvement. His work has appeared in the New York Times, Time, and Entrepreneur, and on CBS This Morning, and is taught in colleges around the world.
+                    </p>
+                    <p class="product-description">
+                        His website, jamesclear.com, receives millions of visitors each month, and his email newsletter has hundreds of thousands of subscribers. He is also the creator of The Habits Academy, the premier training platform for individuals and organizations that are interested in building better habits in life and work.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Related Products -->
+            <div class="mt-5">
+                <h2 class="section-title">Related Books</h2>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="related-product-card">
+                            <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=400&auto=format&fit=crop" 
+                                 alt="The Power of Habit" 
+                                 class="related-product-image">
+                            <div class="book-card-body">
+                                <h4 class="book-title">The Power of Habit</h4>
+                                <p class="book-author">by Charles Duhigg</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="book-price">$16.99</span>
+                                    <button class="btn btn-custom btn-sm">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="related-product-card">
+                            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=400&auto=format&fit=crop" 
+                                 alt="Deep Work" 
+                                 class="related-product-image">
+                            <div class="book-card-body">
+                                <h4 class="book-title">Deep Work</h4>
+                                <p class="book-author">by Cal Newport</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="book-price">$15.99</span>
+                                    <button class="btn btn-custom btn-sm">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="related-product-card">
+                            <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=400&auto=format&fit=crop" 
+                                 alt="The Compound Effect" 
+                                 class="related-product-image">
+                            <div class="book-card-body">
+                                <h4 class="book-title">The Compound Effect</h4>
+                                <p class="book-author">by Darren Hardy</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="book-price">$13.99</span>
+                                    <button class="btn btn-custom btn-sm">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="related-product-card">
+                            <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=400&auto=format&fit=crop" 
+                                 alt="The 7 Habits" 
+                                 class="related-product-image">
+                            <div class="book-card-body">
+                                <h4 class="book-title">7 Habits of Highly Effective People</h4>
+                                <p class="book-author">by Stephen Covey</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="book-price">$18.99</span>
+                                    <button class="btn btn-custom btn-sm">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h3 class="footer-title">EBOI</h3>
+                    <p class="text-secondary">Your trusted destination for digital and physical books. Discover, read, and grow with our extensive collection.</p>
+                    <div class="mt-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <a href="#" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Shop</a>
+                    <a href="#" class="footer-link">Blog</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4 class="footer-title">Categories</h4>
+                    <a href="#" class="footer-link">Fiction</a>
+                    <a href="#" class="footer-link">Non-Fiction</a>
+                    <a href="#" class="footer-link">Digital Books</a>
+                    <a href="#" class="footer-link">Physical Books</a>
+                    <a href="#" class="footer-link">New Arrivals</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4 class="footer-title">Customer Service</h4>
+                    <a href="#" class="footer-link">FAQ</a>
+                    <a href="#" class="footer-link">Shipping Info</a>
+                    <a href="#" class="footer-link">Returns</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms & Conditions</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Eboi. All rights reserved. | Designed with <i class="fas fa-heart"></i> for book lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Change main product image
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.product-thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        // Quantity controls
+        function increaseQty() {
+            const qtyInput = document.getElementById('quantity');
+            qtyInput.value = parseInt(qtyInput.value) + 1;
+        }
+        
+        function decreaseQty() {
+            const qtyInput = document.getElementById('quantity');
+            if (parseInt(qtyInput.value) > 1) {
+                qtyInput.value = parseInt(qtyInput.value) - 1;
+            }
+        }
+        
+        // Format selection
+        document.querySelectorAll('.format-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.format-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Tabs functionality
+        function openTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content-item').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

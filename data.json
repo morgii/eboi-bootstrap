@@ -1,0 +1,85 @@
+{
+  "images": [
+    {
+      "url": "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Modern Book Cover",
+      "position": "hero",
+      "title": "The Midnight Library",
+      "author": "Matt Haig",
+      "price": "$18.99",
+      "type": "Physical"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Self Improvement Book",
+      "position": "featured",
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "price": "$14.99",
+      "type": "Digital"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Fiction Book",
+      "position": "featured",
+      "title": "Where the Crawdads Sing",
+      "author": "Delia Owens",
+      "price": "$16.99",
+      "type": "Physical"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Business Strategy Book",
+      "position": "featured",
+      "title": "The 48 Laws of Power",
+      "author": "Robert Greene",
+      "price": "$19.99",
+      "type": "Both"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Classic Literature",
+      "position": "featured",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "price": "$11.99",
+      "type": "Both"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Psychology Book",
+      "position": "bestseller",
+      "title": "Thinking, Fast and Slow",
+      "author": "Daniel Kahneman",
+      "price": "$17.99",
+      "type": "Digital"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Science Fiction Novel",
+      "position": "bestseller",
+      "title": "Project Hail Mary",
+      "author": "Andy Weir",
+      "price": "$15.99",
+      "type": "Physical"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Mystery Thriller",
+      "position": "bestseller",
+      "title": "The Silent Patient",
+      "author": "Alex Michaelides",
+      "price": "$13.99",
+      "type": "Both"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Romance Novel",
+      "position": "bestseller",
+      "title": "It Ends with Us",
+      "author": "Colleen Hoover",
+      "price": "$12.99",
+      "type": "Digital"
+    }
+  ]
+}

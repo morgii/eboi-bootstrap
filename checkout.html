@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Eboi</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Additional styles specific to checkout page */
+        .checkout-section {
+            padding: 4rem 0;
+        }
+        
+        .checkout-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .breadcrumb-custom {
+            background-color: transparent;
+            padding: 0;
+            margin-bottom: 3rem;
+        }
+        
+        .breadcrumb-custom .breadcrumb-item {
+            color: var(--secondary-text);
+        }
+        
+        .breadcrumb-custom .breadcrumb-item.active {
+            color: var(--primary-text);
+        }
+        
+        .breadcrumb-custom .breadcrumb-item + .breadcrumb-item::before {
+            color: var(--secondary-text);
+        }
+        
+        .checkout-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .checkout-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--border-color);
+            z-index: 0;
+        }
+        
+        .step-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary-bg);
+            border: 2px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .step-item.active .step-circle {
+            background-color: var(--primary-text);
+            color: var(--primary-bg);
+            border-color: var(--primary-text);
+        }
+        
+        .step-item.completed .step-circle {
+            background-color: var(--primary-text);
+            color: var(--primary-bg);
+            border-color: var(--primary-text);
+        }
+        
+        .step-label {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+        }
+        
+        .step-item.active .step-label {
+            color: var(--primary-text);
+            font-weight: 600;
+        }
+        
+        .checkout-form {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .form-label {
+            color: var(--primary-text);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            color: var(--primary-text);
+            padding: 0.75rem;
+            border-radius: 5px;
+        }
+        
+        .form-control:focus {
+            background-color: var(--primary-bg);
+            border-color: var(--primary-text);
+            color: var(--primary-text);
+            box-shadow: none;
+        }
+        
+        .form-select {
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            color: var(--primary-text);
+        }
+        
+        .form-select:focus {
+            background-color: var(--primary-bg);
+            border-color: var(--primary-text);
+            color: var(--primary-text);
+            box-shadow: none;
+        }
+        
+        .form-check-input {
+            background-color: var(--primary-bg);
+            border-color: var(--border-color);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary-text);
+            border-color: var(--primary-text);
+        }
+        
+        .order-summary {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .cart-item-meta {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+        
+        .cart-item-price {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-row.total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border-color);
+        }
+        
+        .payment-method {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover,
+        .payment-method.active {
+            border-color: var(--primary-text);
+            background-color: var(--tertiary-bg);
+        }
+        
+        .payment-method input[type="radio"] {
+            margin-right: 1rem;
+        }
+        
+        .payment-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        .promo-code-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .input-group .form-control {
+            border-right: none;
+        }
+        
+        .input-group .btn {
+            border-left: none;
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-steps::before {
+                display: none;
+            }
+            
+            .checkout-steps {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .step-item {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                text-align: left;
+            }
+            
+            .step-circle {
+                margin-right: 1rem;
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#">EBOI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Digital Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Physical Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <button class="btn btn-custom ms-3">
+                    <i class="fas fa-shopping-cart me-2"></i>Cart (3)
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CHECKOUT SECTION -->
+    <section class="checkout-section">
+        <div class="container">
+            <h1 class="checkout-title">Checkout</h1>
+            
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-custom">
+                    <li class="breadcrumb-item"><a href="#" style="color: var(--secondary-text); text-decoration: none;">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#" style="color: var(--secondary-text); text-decoration: none;">Cart</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                </ol>
+            </nav>
+            
+            <!-- Checkout Steps -->
+            <div class="checkout-steps">
+                <div class="step-item completed">
+                    <div class="step-circle">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="step-label">Cart</div>
+                </div>
+                <div class="step-item active">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Information</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">Complete</div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <!-- Left Column - Forms -->
+                <div class="col-lg-7">
+                    <!-- Customer Information -->
+                    <div class="checkout-form">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-user me-2"></i>Customer Information
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">First Name *</label>
+                                <input type="text" class="form-control" placeholder="John" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Last Name *</label>
+                                <input type="text" class="form-control" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" placeholder="john.doe@example.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" class="form-control" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Shipping Address -->
+                    <div class="checkout-form">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-shipping-fast me-2"></i>Shipping Address
+                        </h3>
+                        <div class="mb-3">
+                            <label class="form-label">Street Address *</label>
+                            <input type="text" class="form-control" placeholder="123 Main Street" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Apartment, Suite, etc. (Optional)</label>
+                            <input type="text" class="form-control" placeholder="Apt 4B">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">City *</label>
+                                <input type="text" class="form-control" placeholder="New York" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">State / Province *</label>
+                                <select class="form-select" required>
+                                    <option value="">Select State</option>
+                                    <option value="NY">New York</option>
+                                    <option value="CA">California</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="IL">Illinois</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">ZIP / Postal Code *</label>
+                                <input type="text" class="form-control" placeholder="10001" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Country *</label>
+                                <select class="form-select" required>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="AU">Australia</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sameAsBilling">
+                            <label class="form-check-label" for="sameAsBilling">
+                                Billing address same as shipping
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Method -->
+                    <div class="checkout-form">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-credit-card me-2"></i>Payment Method
+                        </h3>
+                        
+                        <label class="payment-method active">
+                            <input type="radio" name="payment" value="card" checked>
+                            <span class="payment-icon"><i class="fas fa-credit-card"></i></span>
+                            <span><strong>Credit / Debit Card</strong></span>
+                        </label>
+                        
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="paypal">
+                            <span class="payment-icon"><i class="fab fa-paypal"></i></span>
+                            <span><strong>PayPal</strong></span>
+                        </label>
+                        
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="stripe">
+                            <span class="payment-icon"><i class="fab fa-stripe"></i></span>
+                            <span><strong>Stripe</strong></span>
+                        </label>
+                        
+                        <div id="cardDetails" class="mt-3">
+                            <div class="mb-3">
+                                <label class="form-label">Card Number *</label>
+                                <input type="text" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Cardholder Name *</label>
+                                <input type="text" class="form-control" placeholder="John Doe">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Expiry Date *</label>
+                                    <input type="text" class="form-control" placeholder="MM/YY" maxlength="5">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">CVV *</label>
+                                    <input type="text" class="form-control" placeholder="123" maxlength="4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Order Summary -->
+                <div class="col-lg-5">
+                    <div class="order-summary">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-receipt me-2"></i>Order Summary
+                        </h3>
+                        
+                        <!-- Cart Items -->
+                        <div class="cart-items mb-3">
+                            <div class="cart-item">
+                                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400&auto=format&fit=crop" 
+                                     alt="Atomic Habits" 
+                                     class="cart-item-image">
+                                <div class="cart-item-details">
+                                    <div class="cart-item-title">Atomic Habits</div>
+                                    <div class="cart-item-meta">Digital | Qty: 1</div>
+                                    <div class="cart-item-price">$14.99</div>
+                                </div>
+                            </div>
+                            
+                            <div class="cart-item">
+                                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=400&auto=format&fit=crop" 
+                                     alt="Where the Crawdads Sing" 
+                                     class="cart-item-image">
+                                <div class="cart-item-details">
+                                    <div class="cart-item-title">Where the Crawdads Sing</div>
+                                    <div class="cart-item-meta">Physical | Qty: 1</div>
+                                    <div class="cart-item-price">$16.99</div>
+                                </div>
+                            </div>
+                            
+                            <div class="cart-item">
+                                <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=400&auto=format&fit=crop" 
+                                     alt="The 48 Laws of Power" 
+                                     class="cart-item-image">
+                                <div class="cart-item-details">
+                                    <div class="cart-item-title">The 48 Laws of Power</div>
+                                    <div class="cart-item-meta">Physical | Qty: 1</div>
+                                    <div class="cart-item-price">$19.99</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Promo Code -->
+                        <div class="promo-code-section">
+                            <label class="form-label">Promo Code</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Enter code">
+                                <button class="btn btn-custom" type="button">Apply</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Price Summary -->
+                        <div class="mt-3">
+                            <div class="summary-row">
+                                <span>Subtotal (3 items)</span>
+                                <span>$51.97</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping</span>
+                                <span>$5.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Tax</span>
+                                <span>$4.16</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Discount</span>
+                                <span class="text-success">-$0.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span>$61.13</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Place Order Button -->
+                        <button class="btn btn-custom w-100 mt-3" style="padding: 1rem; font-size: 1.2rem;">
+                            <i class="fas fa-lock me-2"></i>Place Order
+                        </button>
+                        
+                        <div class="text-center mt-3">
+                            <small class="text-secondary">
+                                <i class="fas fa-shield-alt me-1"></i>
+                                Secure checkout - Your information is protected
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h3 class="footer-title">EBOI</h3>
+                    <p class="text-secondary">Your trusted destination for digital and physical books. Discover, read, and grow with our extensive collection.</p>
+                    <div class="mt-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <a href="#" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Shop</a>
+                    <a href="#" class="footer-link">Blog</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4 class="footer-title">Categories</h4>
+                    <a href="#" class="footer-link">Fiction</a>
+                    <a href="#" class="footer-link">Non-Fiction</a>
+                    <a href="#" class="footer-link">Digital Books</a>
+                    <a href="#" class="footer-link">Physical Books</a>
+                    <a href="#" class="footer-link">New Arrivals</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4 class="footer-title">Customer Service</h4>
+                    <a href="#" class="footer-link">FAQ</a>
+                    <a href="#" class="footer-link">Shipping Info</a>
+                    <a href="#" class="footer-link">Returns</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms & Conditions</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Eboi. All rights reserved. | Designed with <i class="fas fa-heart"></i> for book lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Payment method selection
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => {
+                    m.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Show/hide card details based on selection
+                const cardDetails = document.getElementById('cardDetails');
+                const selectedMethod = this.querySelector('input[type="radio"]').value;
+                
+                if (selectedMethod === 'card') {
+                    cardDetails.style.display = 'block';
+                } else {
+                    cardDetails.style.display = 'none';
+                }
+            });
+        });
+        
+        // Format card number with spaces
+        const cardNumberInput = document.querySelector('input[placeholder="1234 5678 9012 3456"]');
+        if (cardNumberInput) {
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s/g, '');
+                let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+                e.target.value = formattedValue;
+            });
+        }
+        
+        // Format expiry date
+        const expiryInput = document.querySelector('input[placeholder="MM/YY"]');
+        if (expiryInput) {
+            expiryInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                }
+                e.target.value = value;
+            });
+        }
+        
+        // Place order button
+        document.querySelector('.btn-custom.w-100').addEventListener('click', function() {
+            alert('Order placed successfully! Thank you for shopping with Eboi.');
+        });
+    </script>
+</body>
+</html>

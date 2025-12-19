@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eboi - Project Preview</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .preview-hero {
+            background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--primary-bg) 100%);
+            padding: 6rem 0 4rem 0;
+            text-align: center;
+        }
+        
+        .preview-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .preview-subtitle {
+            font-size: 1.3rem;
+            color: var(--secondary-text);
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+        
+        .preview-section {
+            padding: 4rem 0;
+        }
+        
+        .preview-card {
+            background-color: var(--secondary-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .preview-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-text);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
+        }
+        
+        .preview-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--border-color);
+            background-color: var(--tertiary-bg);
+        }
+        
+        .preview-card-body {
+            padding: 2rem;
+        }
+        
+        .preview-card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .preview-card-description {
+            color: var(--secondary-text);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .btn-preview {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .credits-section {
+            background-color: var(--secondary-bg);
+            padding: 4rem 0;
+            margin-top: 3rem;
+        }
+        
+        .credits-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .team-member {
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            border-color: var(--primary-text);
+            transform: translateY(-5px);
+        }
+        
+        .team-member-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--tertiary-bg), var(--secondary-bg));
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 2rem;
+        }
+        
+        .team-member-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member-roll {
+            color: var(--secondary-text);
+            font-size: 1.05rem;
+        }
+        
+        .github-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .btn-github {
+            background-color: var(--primary-text);
+            color: var(--primary-bg);
+            border: 2px solid var(--primary-text);
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .btn-github:hover {
+            background-color: transparent;
+            color: var(--primary-text);
+            transform: scale(1.05);
+        }
+        
+        .github-icon {
+            font-size: 1.8rem;
+        }
+        
+        @media (max-width: 768px) {
+            .preview-title {
+                font-size: 2.5rem;
+            }
+            
+            .preview-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+   
+    <!-- HERO SECTION -->
+    <section class="preview-hero">
+        <div class="container">
+            <h1 class="preview-title">Eboi - Book Store Project</h1>
+            <p class="preview-subtitle">
+                A modern, responsive e-commerce website for digital and physical books. Built with Bootstrap, featuring a clean black and white theme with modular CSS for easy customization. Explore our comprehensive book shopping experience from browsing to checkout.
+            </p>
+            <div class="mt-4">
+                <span class="book-badge me-2">HTML5</span>
+                <span class="book-badge me-2">CSS3</span>
+                <span class="book-badge me-2">JavaScript</span>
+                <span class="book-badge me-2">Bootstrap 5</span>
+                <span class="book-badge">Responsive Design</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREVIEW PAGES SECTION -->
+    <section class="preview-section">
+        <div class="container">
+            <h2 class="section-title">Project Pages</h2>
+            
+            <div class="row g-4">
+                <!-- Home Page Preview -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="preview-card">
+                        <img src="https://i.ibb.co.com/rK1f42Nq/image.png" 
+                             alt="Home Page Preview" 
+                             class="preview-image">
+                        <div class="preview-card-body">
+                            <h3 class="preview-card-title">
+                                <i class="fas fa-home me-2"></i>Home Page
+                            </h3>
+                            <p class="preview-card-description">
+                                Main landing page featuring hero section, category cards, featured books, bestsellers, and complete navigation system.
+                            </p>
+                            <a href="home.html" class="btn btn-custom btn-preview">
+                                View Home Page <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Page Preview -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="preview-card">
+                        <img src="https://i.ibb.co.com/fd71MdVw/image.png" 
+                             alt="Product Page Preview" 
+                             class="preview-image">
+                        <div class="preview-card-body">
+                            <h3 class="preview-card-title">
+                                <i class="fas fa-book me-2"></i>Product Page
+                            </h3>
+                            <p class="preview-card-description">
+                                Detailed product view with image gallery, format selection, reviews, ratings, and related products section.
+                            </p>
+                            <a href="product.html" class="btn btn-custom btn-preview">
+                                View Product Page <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkout Page Preview -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="preview-card">
+                        <img src="https://i.ibb.co.com/Nd7vYWCp/image.png" 
+                             alt="Checkout Page Preview" 
+                             class="preview-image">
+                        <div class="preview-card-body">
+                            <h3 class="preview-card-title">
+                                <i class="fas fa-shopping-cart me-2"></i>Checkout Page
+                            </h3>
+                            <p class="preview-card-description">
+                                Complete checkout process with customer information, shipping details, payment methods, and order summary.
+                            </p>
+                            <a href="checkout.html" class="btn btn-custom btn-preview">
+                                View Checkout Page <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CREDITS SECTION -->
+    <section class="credits-section">
+        <div class="container">
+            <h2 class="credits-title">
+                <i class="fas fa-users me-3"></i>Project Team
+            </h2>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-member-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-member-name">Kamrul Hasan</div>
+                    <div class="team-member-roll">Roll: 852473</div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-member-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-member-name">Md Yeamin</div>
+                    <div class="team-member-roll">Roll: 852453</div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-member-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-member-name">MD Mahmudul Hasan</div>
+                    <div class="team-member-roll">Roll: 852444</div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-member-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-member-name">Borhan Bapari</div>
+                    <div class="team-member-roll">Roll: 852482</div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-member-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-member-name">Nazmin Sorkar Lipi</div>
+                    <div class="team-member-roll">Roll: 852442</div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-member-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-member-name">Sabit Hasan Turzo</div>
+                    <div class="team-member-roll">Roll: 852445</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GITHUB SECTION -->
+    <section class="github-section">
+        <div class="container">
+            <h3 class="mb-4" style="font-size: 2rem; font-weight: 600;">View Source Code</h3>
+            <a href="#" class="btn-github">
+                <i class="fab fa-github github-icon"></i>
+                <span>GitHub Repository</span>
+            </a>
+            <p class="mt-4 text-secondary">
+                <i class="fas fa-code me-2"></i>Open Source Project • HTML, CSS, JavaScript, Bootstrap 5
+            </p>
+        </div>
+    </section>
+
+   
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
